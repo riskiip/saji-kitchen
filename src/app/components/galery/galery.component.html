@@ -1,0 +1,31 @@
+<section class="gallery-section" id="gallery">
+  <div class="wrapper">
+    <h2>Galeri Saji Kitchen</h2>
+    <button
+      class="carousel-btn prev"
+      (click)="prevSlide()"
+      aria-label="Sebelumnya"
+    >
+      &#8592;
+    </button>
+    <div class="carousel" #carouselContainer>
+      <div class="carousel-track" #carouselTrack>
+        <img
+          *ngFor="let img of images; let i = index"
+          [src]="img"
+          [alt]="'Gallery ' + (i + 1)"
+          [ngClass]="{ active: i === currentIndex }"
+          class="carousel-img"
+          #carouselImgs
+        />
+      </div>
+    </div>
+    <button
+      class="carousel-btn next"
+      (click)="nextSlide()"
+      aria-label="Berikutnya"
+    >
+      &#8594;
+    </button>
+  </div>
+</section>

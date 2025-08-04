@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 75vh;
+  height: 100vh;
   padding: 2rem;
   gap: 2rem;
   background-image: url("../../../assets/offset-blobs.svg");

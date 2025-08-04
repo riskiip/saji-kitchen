@@ -1,0 +1,159 @@
+.wrapper {
+  position: relative;
+  margin: auto;
+  max-width: 850px;
+}
+
+.gallery-section {
+  padding: 3rem 1rem;
+  background: #fffbe6;
+  text-align: center;
+}
+
+.gallery-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #fd3f3f;
+  font-weight: 700;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  height: 320px;
+  /* display: flex; align-items: center; justify-content: center; <-- Hapus ini */
+
+  /* Ganti overflow: hidden menjadi overflow-x: auto */
+  overflow-x: auto;
+  overflow-y: hidden; /* pastikan y tetap hidden */
+
+  /* Pindahkan styling scrollbar ke sini */
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #fd3f3f #eee;
+}
+
+/* Pindahkan styling scrollbar ke sini */
+.carousel::-webkit-scrollbar {
+  height: 8px;
+}
+.carousel::-webkit-scrollbar-thumb {
+  background: #fd3f3f;
+  border-radius: 4px;
+}
+.carousel::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 4px;
+}
+
+.carousel-track {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 24px;
+  padding: 1rem 1.5rem;
+  min-width: max-content; /* Biarkan seperti ini, ini sudah benar untuk pola ini */
+
+  /* Hapus semua properti overflow dan scrollbar dari sini */
+  /* overflow-x: auto; */
+  /* overflow-y: hidden; */
+  /* scroll-behavior: smooth; */
+  /* scrollbar-width: thin; */
+  /* scrollbar-color: #fd3f3f #eee; */
+}
+/* Hapus juga semua styling .carousel-track::-webkit-scrollbar */
+
+.carousel-img {
+  width: 200px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  opacity: 0.9;
+  transform: scale(1);
+  transition:
+    transform 0.4s cubic-bezier(0.4,0,0.2,1),
+    opacity 0.4s cubic-bezier(0.4,0,0.2,1),
+    box-shadow 0.4s,
+    border 0.3s;
+  background: #eee;
+  flex-shrink: 0;
+  border: 2px solid transparent;
+}
+
+.carousel-img.active {
+  opacity: 1;
+  transform: scale(1.2);
+  box-shadow: 0 8px 32px rgba(253, 63, 63, 0.18), 0 2px 12px rgba(0,0,0,0.10);
+  z-index: 2;
+}
+
+.carousel-btn {
+  background: #fd3f3f;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  /* Hapus margin karena kita akan kontrol penuh dengan position */
+  /* margin: 0 8px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s; /* Tambahkan transisi untuk transform */
+  box-shadow: 0 2px 8px rgba(253, 63, 63, 0.12);
+  z-index: 10;
+  position: absolute;
+
+  /* INI KUNCINYA: Untuk sentering vertikal */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.prev {
+  /* Beri sedikit jarak dari tepi kiri */
+  left: 16px; /* atau 1rem */
+}
+
+.next {
+  /* Beri sedikit jarak dari tepi kanan */
+  right: 16px; /* atau 1rem */
+}
+
+.carousel-btn:hover,
+.carousel-btn:focus {
+  background: #ffb347;
+  color: #fd3f3f;
+  transform: translateY(-50%) scale(1.1); /* Efek hover yang lebih bagus */
+}
+
+@media (max-width: 900px) {
+  .carousel {
+    height: 180px;
+    max-width: 98vw;
+  }
+  .carousel-img,
+  .carousel-img.active {
+    width: 100px;
+    height: 120px;
+  }
+  .carousel-track {
+    gap: 12px;
+    padding: 0.5rem 0.5rem;
+  }
+  .carousel-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+  .prev {
+    left: 8px;
+  }
+  .next {
+    right: 8px;
+  }
+}
