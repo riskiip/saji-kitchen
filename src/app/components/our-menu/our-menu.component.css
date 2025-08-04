@@ -3,8 +3,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  padding: 2rem;
+  height: 80vh;
+  padding: 2rem 2rem 0 2rem;
   gap: 2rem;
   background-image: url("../../../assets/offset-blobs.svg");
   background-size: cover;
@@ -30,6 +30,23 @@
 
 .hero-text {
   flex: 1;
+}
+
+.wrap-wa {
+  height: 20vh;
+}
+
+.order-wa {
+  cursor: pointer;
+  display: flex;
+  border-radius: 20px;
+  background: #25d366;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 12px;
+  gap: 6px;
+  color: #075e54;
+  margin: auto;
 }
 
 @media (max-width: 768px) {

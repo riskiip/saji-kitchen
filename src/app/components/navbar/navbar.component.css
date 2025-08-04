@@ -119,10 +119,6 @@ nav {
         color: var(--primary-color);
     }
 
-    .nav__links li:last-child {
-        display: none;
-    }
-
     .nav__btns {
         flex: 1;
         display: flex;
