@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "./components/header/header.component";
 import { OurServiceComponent } from "./components/our-service/our-service.component";
 import { OurMenuComponent } from "./components/our-menu/our-menu.component";
@@ -12,6 +12,13 @@ import { FooterComponent } from "./components/footer/footer.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'food_UI';
+export class AppComponent implements OnInit {
+  title = 'Saji Kitchen';
+  isLoadAnimation = true;
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoadAnimation = false;
+    }, 1000);
+  }
 }

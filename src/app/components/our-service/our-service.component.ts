@@ -10,18 +10,18 @@ import { Component } from '@angular/core';
       <h2 class="section__header">Your Favourite Food Delivery Partner</h2>
       <div class="service__grid">
         <div class="service__card">
-          <img src="assets/service-1.jpg" alt="service" />
-          <h4>Easy To Order</h4>
+          <img src="assets/bahan_berkualitas.svg" alt="service" style="transform: scale(1.5);"/>
+          <h4>Bahan Baku Berkualitas</h4>
           <p>You only need a few steps in ordering food</p>
         </div>
         <div class="service__card">
-          <img src="assets/service-2.jpg" alt="service" />
-          <h4>Fastest Delivery</h4>
+          <img src="assets/produksi_terjamin.svg" alt="service"/>
+          <h4>Proses Produksi Terjamin</h4>
           <p>Delivery that is always ontime even faster</p>
         </div>
         <div class="service__card">
-          <img src="assets/service-3.jpg" alt="service" />
-          <h4>Best Quality</h4>
+          <img src="assets/mudah_dipesan.svg" alt="service" style="transform: scale(2);"/>
+          <h4>Mudah Dipesan</h4>
           <p>Not only fast for us quality is also number one</p>
         </div>
       </div>

@@ -11,8 +11,7 @@ import { Component } from '@angular/core';
       </div>
       <div class="header__content">
         <div class="header__tag">
-          More than Faster
-          <img src="assets/delivery-bike.png" alt="header tag" />
+          More than just an ordinary food 👌🏻
         </div>
         <h1>Kami adalah <span>Saji Kitchen</span></h1>
         <p class="section__description">
@@ -20,7 +19,7 @@ import { Component } from '@angular/core';
           free delivery.
         </p>
         <div class="header__btns">
-          <button class="btn">Get Started</button>
+          <button class="btn">Ayo Kenal Kami</button>
         </div>
       </div>
     </div>

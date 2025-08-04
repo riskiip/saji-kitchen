@@ -1,5 +1,11 @@
-<app-header/>
-<app-our-service/>
-<app-our-menu/>
-<app-customer-feedback/>
-<app-footer/>
+@if (isLoadAnimation) {
+<div class="loader">
+  <img src="../assets/loader.gif" alt="" />
+</div>
+} @else {
+<app-header />
+<app-our-service />
+<app-our-menu />
+<app-customer-feedback />
+<app-footer />
+}
