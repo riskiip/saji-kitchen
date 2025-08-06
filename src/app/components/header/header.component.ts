@@ -6,12 +6,7 @@ import { HomeComponent } from '../home/home.component';
   selector: 'app-header',
   standalone: true,
   imports: [NavbarComponent, HomeComponent],
-  template: `
-    <header>
-      <app-navbar />
-      <app-home />
-    </header>
-  `,
+  templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {}
