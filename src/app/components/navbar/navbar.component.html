@@ -1,20 +1,30 @@
-<nav>
-  <div class="nav__header">
+<nav [class.scrolled]="isScrolled">
+  <div class="nav__container">
     <div class="nav__logo">
       <a href="#" class="logo">
+        <img src="assets/saji_kitchen.png" alt="Saji Kitchen Logo">
         <span>Saji Kitchen</span>
       </a>
     </div>
-    <div class="nav__menu__btn" id="menu-btn">
-      <i class="ri-menu-line"></i>
+
+    <div class="nav__header">
+      <div class="nav__menu__btn" (click)="toggleMenu()">
+        <i class="ri-menu-line"></i>
+      </div>
+    </div>
+
+    <ul class="nav__links" [class.open]="isMenuOpen">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#review">Review</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ul>
+
+    <div class="nav__btns">
+      <div class="nav__btn">
+        Pesan Sekarang
+      </div>
     </div>
   </div>
-  <ul class="nav__links" id="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#service">Our Services</a></li>
-    <li><a href="#menu">Our Menu</a></li>
-    <li><a href="#review">Reviews</a></li>
-    <li><a href="#gallery">Our Gallery</a></li>
-    <li><a href="#maps">Our Location</a></li>
-  </ul>
 </nav>
