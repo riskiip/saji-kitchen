@@ -1,94 +1,135 @@
-.header__container {
-    display: grid;
-    gap: 2rem 1rem;
-    overflow: hidden;
+/* -- TAMPILAN DASAR (MOBILE) -- */
+.home {
+  display: flex;
+  /* Kunci: Mengubah arah flex menjadi kolom dan membalik urutannya */
+  flex-direction: column-reverse;
+  width: 100%;
+  min-height: 100vh; /* Gunakan min-height agar konten tidak terpotong */
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1.5rem; /* Beri jarak dari tepi layar */
+  text-align: center;
 }
 
-.header__image img {
-    max-width: 575px;
-    margin-inline: auto;
+.left-section {
+  width: 100%;
+  max-width: 500px; /* Batasi lebar teks agar tetap nyaman dibaca */
+  color: var(--text-dark);
+  margin-left: 0; /* Hapus margin kiri untuk mobile */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Pusatkan item di dalamnya (seperti tombol) */
+  justify-content: center;
 }
 
-.header__tag {
-    margin-bottom: 2rem;
-    max-width: fit-content;
-    margin-inline: auto;
-    padding: 0.75rem 1rem;
-    display: flex;
+.right-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem; /* Beri jarak antara gambar dan teks */
+}
+
+.right-section img {
+  width: 100%;
+  max-width: 350px; /* Atur ukuran maksimal gambar di mobile */
+  height: auto;
+}
+
+/* Atur ulang ukuran font untuk mobile */
+.left-section .title-hero {
+  font-size: 2rem; /* Ukuran lebih kecil untuk mobile */
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.left-section .description-hero {
+  margin-bottom: 2rem;
+}
+
+.left-section .description-hero__title {
+  font-size: 1.1rem; /* Ukuran lebih kecil untuk mobile */
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.left-section .description-hero__tagline {
+  font-size: 1rem; /* Ukuran lebih kecil untuk mobile */
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.left-section .button-hero {
+  display: flex;
+  flex-direction: column; /* Tombol menumpuk di mobile agar tidak sempit */
+  gap: 1rem;
+  width: 100%;
+}
+
+.left-section .button-hero .menu-button,
+.left-section .button-hero .about-button {
+  background-color: var(--red);
+  color: var(--white);
+  border-radius: 10px;
+  padding: 12px 20px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 700;
+}
+
+
+/* -- TAMPILAN LAYAR LEBAR (DESKTOP) -- */
+/* Gunakan min-width, misalnya 992px, untuk menerapkan gaya desktop */
+@media (min-width: 992px) {
+  .home {
+    /* Kembalikan ke layout baris */
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    gap: 1rem;
-    color: var(--primary-color);
-    background-color: var(--primary-color-dark);
-    border-radius: 5rem;
-}
+    text-align: left;
+    height: 100vh;
+    padding: 0; /* Hapus padding mobile */
+  }
 
-.header__tag img {
-    max-width: 25px;
-}
+  .left-section {
+    width: 50%;
+    margin-left: 140px; /* Kembalikan margin kiri */
+    align-items: flex-start; /* Ratakan kembali ke kiri */
+  }
 
-.header__content h1 {
-    margin-bottom: 2rem;
-    font-size: 4.75rem;
-    color: var(--text-dark);
-    text-align: center;
-    line-height: 5.75rem;
-}
+  .right-section {
+    margin-bottom: 0; /* Hapus margin bawah */
+  }
 
-.header__content h1 span {
-    color: var(--primary-color);
-}
+  .right-section img {
+    max-width: 600px; /* Kembalikan ukuran gambar desktop */
+  }
 
-.header__content .section__description {
-    margin-bottom: 2rem;
-    text-align: center;
-}
+  /* Kembalikan ukuran font desktop menggunakan variabel Anda */
+  .left-section .title-hero {
+    font-size: var(--title-size);
+    margin-bottom: 23px;
+  }
 
-.header__btns {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-}
+  .left-section .description-hero {
+    margin-bottom: 37px;
+  }
 
-.header__btns a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--text-dark);
-}
+  .left-section .description-hero__title {
+    font-size: var(--description-size);
+    margin-bottom: 9px;
+  }
 
-.header__btns a span {
-    padding: 4px 10px;
-    font-size: 1.5rem;
-    color: #fdc55e;
-    border-radius: 100%;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
-}
+  .left-section .description-hero__tagline {
+    font-size: var(--tagline-size);
+    margin-top: 0.5rem;
+  }
 
-.header__btns a:hover {
-    color: var(--primary-color);
-}
-
-@media (width > 768px) {
-
-    .header__container {
-        grid-template-columns: repeat(2, 1fr);
-        align-items: center;
-    }
-
-    .header__image {
-        grid-area: 1/2/2/3;
-    }
-
-    .header__tag {
-        margin-inline-start: unset;
-    }
-
-    .header__content :is(h1, .section__description) {
-        text-align: left;
-    }
-
-    .header__btns {
-        justify-content: flex-start;
-    }
+  .left-section .button-hero {
+    flex-direction: row; /* Tombol kembali berdampingan */
+    gap: 24px;
+    width: auto;
+  }
 }

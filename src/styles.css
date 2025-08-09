@@ -5,12 +5,16 @@
   --primary-color: #FFF3D9;
   --primary-color-transparent: rgba(255, 243, 217, 0.9);
   --primary-color-dark: #E5734A;
-  --red: #D24231;
+  --red: #940303;
   --text-dark: #4A4A4A;
   --text-light: #595959;
   --extra-light: #3c3633;
   --white: #fdf6e3;
   --max-width: 1200px;
+  --title-size: 33px;
+  --description-size: 27px;
+  --tagline-size: 20px;
+  --button-size: 14px
 }
 
 * {
