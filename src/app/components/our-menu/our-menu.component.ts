@@ -7,7 +7,7 @@ import { ConstantApi } from '../../constants/constant-api';
   standalone: true,
   imports: [],
   templateUrl: './our-menu.component.html',
-  styleUrl: './our-menu.component.css',
+  styleUrl: './our-menu.component.scss',
 })
 export class OurMenuComponent {
   api_wa: string = ConstantApi.API_WA

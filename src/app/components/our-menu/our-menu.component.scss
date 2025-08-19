@@ -1,0 +1,156 @@
+/* -- Definisi Variabel Warna & Font -- */
+:root {
+  --background-cream: #FEF9EF;
+  --background-card: #FDF5E2;
+  --text-dark: #333;
+  --text-red: #B91C1C;
+  --button-red: #C53030;
+  --purple-accent: #6B46C1;
+  --font-main: 'Poppins', sans-serif; /* Ganti dengan font pilihan Anda */
+}
+
+/* -- Reset & Body Styling -- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--background-cream);
+}
+
+/* -- Styling Section Menu -- */
+.menu-section {
+  width: 100%;
+  padding: 4rem 1.5rem; /* Padding untuk mobile */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg,
+    #fffdf9,
+    #fff3d9);
+}
+
+.section-title {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.section-title h2 {
+  color: var(--red);
+  font-size: 25px;
+  letter-spacing: 2px;
+  /* ✨ Perubahan #2: Tambahkan text-shadow */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* -- Styling Item Menu (Mobile First) -- */
+.menu-item {
+  display: flex;
+  flex-direction: column; /* Menumpuk vertikal di mobile */
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 500px; /* Batasi lebar di mobile agar tidak terlalu lebar */
+}
+
+.menu-image img {
+  max-width: 505px; /* Ubah agar lebih responsif */
+  max-height: 505px;
+  border-radius: 16px; /* Sudut melengkung */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  display: block;
+}
+
+.menu-details {
+  background: url(../../../assets/box-price.png) no-repeat;
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.menu-name {
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--red);
+  /* ✨ Perubahan #2: Tambahkan text-shadow */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.menu-price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--red);
+  /* ✨ Perubahan #2: Tambahkan text-shadow */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.menu-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.order-button {
+  background-color: var(--red);
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  align-self: flex-start; /* Tombol rata kiri */
+  transition: background-color 0.2s ease;
+}
+
+.order-button:hover {
+  background-color: #A52A2A; /* Warna sedikit lebih gelap saat hover */
+}
+
+/* -- Penyesuaian untuk Layar Lebar (Desktop) -- */
+@media (min-width: 992px) {
+  .menu-section {
+    padding: 5rem 2rem;
+  }
+
+  .menu-item {
+    flex-direction: row;
+    max-width: 1100px;
+    align-items: center;
+    gap: 0; /* ✨ Perubahan #1: Hapus gap */
+  }
+
+  .menu-image {
+    //flex: 1.2;
+    /* ✨ Perubahan #1: Tambahkan z-index agar berada di bawah */
+    position: relative;
+    z-index: 2;
+  }
+
+  .menu-details {
+    flex: 1;
+    /* ✨ Perubahan #1: Tarik box ke kiri & pastikan di atas gambar */
+    margin-left: -21px; /* Sesuaikan nilainya sesuai selera */
+    position: relative;
+    z-index: 1;
+  }
+
+  .menu-price {
+    font-size: 1.1rem;
+  }
+}
