@@ -7,10 +7,10 @@
   color: var(--text-dark);
   text-align: center;
   border-radius: 20px;
-  // Hapus overflow: hidden; dari sini agar tombol panah tidak terpotong
   margin: 20px;
   min-height: 597px;
-  position: relative; // Tambahkan ini untuk positioning tombol panah
+  position: relative;
+  overflow-x: hidden; // DITAMBAHKAN: Mencegah overflow
 }
 
 .container {
@@ -22,10 +22,9 @@
 .carousel-viewport {
   overflow: hidden;
   width: 100%;
-  // Kalkulasi lebar viewport: (4 kartu * 278px) + (3 jarak * 20px)
-  max-width: calc((4 * 278px) + (3 * 20px));
+  max-width: calc((4 * 278px) + (3 * 20px)); // Lebar untuk 4 kartu di desktop
   margin: 0 auto;
-  position: relative; // Tambahkan agar tombol panah lebih mudah diatur
+  position: relative;
 }
 
 .review-cards-container {
@@ -59,7 +58,6 @@
     color: var(--white);
   }
 
-  // Sesuaikan posisi agar berada di luar viewport
   &.left {
     left: -60px;
   }
@@ -78,9 +76,9 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  width: 278px; // Ganti max-width menjadi width
+  width: 278px;
   min-height: 298px;
-  flex-shrink: 0; // Mencegah kartu menyusut
+  flex-shrink: 0;
 }
 
 .section-title {
@@ -126,7 +124,6 @@
   margin-bottom: 20px;
   gap: 15px;
 }
-
 .customer-photo {
   width: 60px;
   height: 60px;
@@ -135,26 +132,50 @@
   border: 3px solid var(--white);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
-
 .customer-info {
   display: flex;
   flex-direction: column;
 }
-
 .customer-name {
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0;
 }
-
 .stars {
   color: var(--star-color);
   font-size: 1rem;
 }
-
 .review-text {
   font-size: 0.95rem;
   line-height: 1.6;
   font-style: italic;
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .review-section {
+    padding: 3rem 1rem;
+    background: url('../../../assets/dimsum-review-mobile.png') no-repeat center;
+  }
+
+  .carousel-viewport {
+    // Perkecil viewport agar hanya cukup untuk 1 kartu
+    max-width: 280px;
+  }
+
+  .section-title {
+    font-size: 1.5rem; // Perkecil judul di mobile
+    margin-bottom: 2rem;
+  }
+
+  .carousel-arrow {
+    // Posisikan ulang tombol panah agar tidak di luar layar
+    &.left {
+      left: -20px;
+    }
+
+    &.right {
+      right: -20px;
+    }
+  }
 }

@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from "@angular/common";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'; // DITAMBAHKAN
+import { Subscription } from 'rxjs'; // DITAMBAHKAN
 
 interface Review {
   nama: string;
@@ -29,21 +31,47 @@ export class CustomerFeedbackComponent implements OnInit, OnDestroy {
   displayReviews: Review[] = [];
   currentIndex = 0;
   private intervalId?: any;
-  readonly itemsPerSlide = 4;
-  transitionStyle = 'transform 0.5s ease-in-out';
 
-  // Variabel baru untuk mengunci aksi selama transisi
+  // DIUBAH: itemsPerSlide menjadi dinamis
+  itemsPerSlide = 4; // Default untuk desktop
+  isMobile = false;
+  private breakpointSubscription: Subscription | undefined;
+
+  transitionStyle = 'transform 0.5s ease-in-out';
   private isTransitioning = false;
 
+  // DITAMBAHKAN: Inject BreakpointObserver
+  constructor(private breakpointObserver: BreakpointObserver) {}
+
   get isCarouselActive(): boolean {
+    // Logika disesuaikan dengan jumlah item yang tampil
     return this.reviews.length > this.itemsPerSlide;
   }
 
   ngOnInit(): void {
+    // DITAMBAHKAN: Mengamati perubahan ukuran layar
+    this.breakpointSubscription = this.breakpointObserver
+      .observe(['(max-width: 768px)'])
+      .subscribe(result => {
+        this.isMobile = result.matches;
+        // Atur ulang carousel setiap kali breakpoint berubah
+        this.setupCarousel();
+      });
+  }
+
+  // DITAMBAHKAN: Fungsi baru untuk mengatur ulang carousel
+  setupCarousel(): void {
+    // Hentikan auto slide yang sedang berjalan
+    clearInterval(this.intervalId);
+
+    // Tentukan jumlah item per slide berdasarkan ukuran layar
+    this.itemsPerSlide = this.isMobile ? 1 : 4;
+
     if (this.isCarouselActive) {
       const clonesFromStart = this.reviews.slice(0, this.itemsPerSlide);
       const clonesFromEnd = this.reviews.slice(-this.itemsPerSlide);
       this.displayReviews = [...clonesFromEnd, ...this.reviews, ...clonesFromStart];
+
       this.transitionStyle = 'none';
       this.currentIndex = this.itemsPerSlide;
 
@@ -58,6 +86,8 @@ export class CustomerFeedbackComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     clearInterval(this.intervalId);
+    // DITAMBAHKAN: Unsubscribe untuk mencegah memory leak
+    this.breakpointSubscription?.unsubscribe();
   }
 
   startAutoSlide(): void {
@@ -68,20 +98,14 @@ export class CustomerFeedbackComponent implements OnInit, OnDestroy {
     }
   }
 
-  // --- PERUBAHAN UTAMA ADA DI SINI ---
-
   next(): void {
-    // Abaikan jika sedang transisi atau carousel tidak aktif
     if (this.isTransitioning || !this.isCarouselActive) return;
-    // Kunci aksi
     this.isTransitioning = true;
     this.currentIndex++;
   }
 
   prev(): void {
-    // Abaikan jika sedang transisi atau carousel tidak aktif
     if (this.isTransitioning || !this.isCarouselActive) return;
-    // Kunci aksi
     this.isTransitioning = true;
     this.currentIndex--;
   }
@@ -99,33 +123,28 @@ export class CustomerFeedbackComponent implements OnInit, OnDestroy {
   }
 
   onTransitionEnd(): void {
-    // Cek untuk loop dari kanan ke kiri (setelah `next`)
     if (this.currentIndex >= this.reviews.length + this.itemsPerSlide) {
       this.transitionStyle = 'none';
       this.currentIndex = this.itemsPerSlide;
       setTimeout(() => {
         this.transitionStyle = 'transform 0.5s ease-in-out';
-        this.isTransitioning = false; // Buka kunci setelah transisi siap
+        this.isTransitioning = false;
       });
-      return; // Keluar dari fungsi lebih awal
+      return;
     }
 
-    // Cek untuk loop dari kiri ke kanan (setelah `prev`)
     if (this.currentIndex < this.itemsPerSlide) {
       this.transitionStyle = 'none';
       this.currentIndex = this.reviews.length + this.itemsPerSlide - 1;
       setTimeout(() => {
         this.transitionStyle = 'transform 0.5s ease-in-out';
-        this.isTransitioning = false; // Buka kunci setelah transisi siap
+        this.isTransitioning = false;
       });
-      return; // Keluar dari fungsi lebih awal
+      return;
     }
 
-    // Jika tidak ada 'lompatan', buka kunci setelah transisi normal selesai
     this.isTransitioning = false;
   }
-
-  // --- BATAS PERUBAHAN ---
 
   getStars(rating: number): number[] {
     return Array(Math.round(rating)).fill(0);
