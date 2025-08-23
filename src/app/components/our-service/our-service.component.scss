@@ -1,19 +1,12 @@
-img {
-  max-width: 144px;
-  max-height: 98px;
-  margin: auto;
-}
-
 .service {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   height: auto;
   min-height: 100vh;
-  padding: 4rem 1.5rem;
-  background: linear-gradient(180deg,
-    #fff3d9,
-    #fffdf9);
+  padding: 3rem 1.5rem; // DIUBAH: Padding atas sedikit dikurangi untuk mobile
+  background: linear-gradient(180deg, #fff3d9, #fffdf9);
+  box-sizing: border-box; // DITAMBAHKAN: Mencegah overflow karena padding
 }
 
 .service-title {
@@ -36,46 +29,54 @@ img {
 }
 
 .card-container {
-  display: flex;
+  display: flex; // DITAMBAHKAN: Untuk alignment box di dalamnya
   flex-direction: column;
-  //box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  justify-content: flex-end; // DITAMBAHKAN: Mendorong box ke bawah
+  align-items: center; // DITAMBAHKAN: Memusatkan box secara horizontal
   width: 100%;
   max-width: 399px;
-  height: 505px;
+  height: auto; // DIUBAH: Tinggi menjadi otomatis
+  aspect-ratio: 399 / 505; // DITAMBAHKAN: Menjaga rasio aspek kartu sesuai gambar
   border-radius: 12px;
-  padding: 2rem 1.5rem;
   text-align: center;
-  gap: 1rem;
-  justify-content: space-around;
-  align-items: center;
+  position: relative;
+  // Animasi scroll
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  position: relative;
+}
+
+// Atur semua gambar latar agar terukur dengan benar
+.service-1, .service-2, .service-3 {
+  background-repeat: no-repeat;
+  background-size: contain; // DITAMBAHKAN: Pastikan seluruh gambar terlihat
+  background-position: center; // DITAMBAHKAN: Pusatkan gambar
 }
 
 .service-1 {
-  background: url(../../../assets/quality.png) no-repeat;
+  background-image: url(../../../assets/quality.png);
 }
 
 .service-2 {
-  background: url(../../../assets/mentai.png) no-repeat;
+  background-image: url(../../../assets/mentai.png);
 }
 
 .service-3 {
-  background: url(../../../assets/click.png) no-repeat;
+  background-image: url(../../../assets/click.png);
 }
 
 .card-box {
   display: flex;
   flex-direction: column;
+  min-height: 200px;
   align-items: center;
-  justify-content: center;
-  border-radius: 36px;
-  width: 369px;
-  height: 294px;
-  position: absolute;
-  bottom: 50px;
+  justify-content: flex-start;
+  border-radius: 24px; // DIUBAH: Sedikit penyesuaian
+  width: 90%; // DIUBAH: Lebar fleksibel, bukan fixed
+  height: auto; // DIUBAH: Tinggi otomatis menyesuaikan konten
+  padding: 1.5rem 1rem; // DITAMBAHKAN: Beri ruang untuk teks
+  position: relative; // DIUBAH: Posisi relatif, bukan absolut
+  bottom: 12%; // DIUBAH: Dorong sedikit ke atas dari dasar
 }
 
 .card-container.is-visible {
@@ -84,35 +85,53 @@ img {
 }
 
 .card-container .card-title {
-  font-size: 20px;
+  font-size: 1.1rem; // DIUBAH: Ukuran font disesuaikan untuk mobile
   font-weight: 700;
   color: var(--red);
-  margin-bottom: 14px;
+  margin-bottom: 0.75rem; // DIUBAH: Jarak disesuaikan
 }
 
 .card-container .card-description {
-  font-size: 15px;
+  font-size: 0.9rem; // DIUBAH: Ukuran font disesuaikan
   font-weight: 400;
   line-height: 1.6;
-  max-width: 250px;
-  height: 120px;
-  align-content: flex-start;
+  max-width: 100%; // DIUBAH: Lebar maksimal mengikuti parent
+  height: auto; // DIUBAH: Tinggi otomatis
 }
 
-@media (min-width: 576px) {
+// Media query untuk layar yang lebih besar
+@media (min-width: 768px) { // DIUBAH: Breakpoint digeser ke 768px untuk tablet
   .service {
     justify-content: center;
-    height: 100vh;
-    padding: 2rem;
+    // Hapus height 100vh agar tidak terpotong jika konten lebih tinggi
   }
 
   .service-content {
     flex-direction: row;
+    align-items: stretch; // DITAMBAHKAN: Membuat semua kartu sama tinggi
     justify-content: center;
     gap: 2rem;
   }
 
   .card-container {
     padding: 1.5rem;
+  }
+
+  .card-box {
+    width: 369px; // DIKEMBALIKAN: Nilai fixed untuk desktop
+    position: absolute; // DIKEMBALIKAN: Posisi absolut untuk desktop
+    padding: 0; // Hapus padding jika tidak diperlukan di desktop
+    background-color: transparent; // Hapus background di desktop
+    backdrop-filter: none;
+  }
+
+  .card-container .card-title {
+    font-size: 20px; // Kembalikan ukuran font desktop
+    margin-bottom: 14px;
+  }
+
+  .card-container .card-description {
+    font-size: 15px; // Kembalikan ukuran font desktop
+    max-width: 250px; // Kembalikan lebar maksimal desktop
   }
 }
