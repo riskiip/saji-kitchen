@@ -6,9 +6,11 @@
 
     <div class="carousel-viewport">
       <div class="review-cards-container"
+           (transitionend)="onTransitionEnd()"
+           [style.transition]="transitionStyle"
            [style.transform]="'translateX(-' + currentIndex * (278 + 20) + 'px)'">
 
-        <div class="review-card" *ngFor="let review of reviews">
+        <div class="review-card" *ngFor="let review of displayReviews">
           <div class="review-header">
             <img [src]="review.foto" alt="Foto {{ review.nama }}" class="customer-photo">
             <div class="customer-info">
@@ -25,8 +27,7 @@
     </div>
 
     <ng-container *ngIf="isCarouselActive">
-      <button class="carousel-arrow left" (click)="manualPrev()">&#10094;</button>
-      <button class="carousel-arrow right" (click)="manualNext()">&#10095;</button>
+      <button class="carousel-arrow left" (click)="manualPrev()">&#10094;</button> <button class="carousel-arrow right" (click)="manualNext()">&#10095;</button>
     </ng-container>
 
   </div>

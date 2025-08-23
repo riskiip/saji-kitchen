@@ -26,19 +26,34 @@ export class CustomerFeedbackComponent implements OnInit, OnDestroy {
     { nama: "Andi", review: "Pelayanannya cepat dan rasanya konsisten.", score: 5, foto: "assets/images/profile-male-2.jpg" },
   ];
 
+  displayReviews: Review[] = [];
   currentIndex = 0;
   private intervalId?: any;
-
-  // Tetap definisikan berapa item yang terlihat
   readonly itemsPerSlide = 4;
+  transitionStyle = 'transform 0.5s ease-in-out';
 
-  // Cek apakah carousel perlu aktif (jika jumlah item lebih banyak dari yang bisa ditampilkan)
+  // Variabel baru untuk mengunci aksi selama transisi
+  private isTransitioning = false;
+
   get isCarouselActive(): boolean {
     return this.reviews.length > this.itemsPerSlide;
   }
 
   ngOnInit(): void {
-    this.startAutoSlide();
+    if (this.isCarouselActive) {
+      const clonesFromStart = this.reviews.slice(0, this.itemsPerSlide);
+      const clonesFromEnd = this.reviews.slice(-this.itemsPerSlide);
+      this.displayReviews = [...clonesFromEnd, ...this.reviews, ...clonesFromStart];
+      this.transitionStyle = 'none';
+      this.currentIndex = this.itemsPerSlide;
+
+      setTimeout(() => {
+        this.transitionStyle = 'transform 0.5s ease-in-out';
+        this.startAutoSlide();
+      });
+    } else {
+      this.displayReviews = this.reviews;
+    }
   }
 
   ngOnDestroy(): void {
@@ -53,39 +68,64 @@ export class CustomerFeedbackComponent implements OnInit, OnDestroy {
     }
   }
 
-  resetAutoSlide(): void {
-    clearInterval(this.intervalId);
-    this.startAutoSlide();
-  }
+  // --- PERUBAHAN UTAMA ADA DI SINI ---
 
-  // Logika baru untuk bergeser satu per satu
   next(): void {
-    const maxIndex = this.reviews.length - this.itemsPerSlide;
-    if (this.currentIndex >= maxIndex) {
-      this.currentIndex = 0; // Kembali ke awal jika sudah di akhir
-    } else {
-      this.currentIndex++;
-    }
+    // Abaikan jika sedang transisi atau carousel tidak aktif
+    if (this.isTransitioning || !this.isCarouselActive) return;
+    // Kunci aksi
+    this.isTransitioning = true;
+    this.currentIndex++;
   }
 
   prev(): void {
-    const maxIndex = this.reviews.length - this.itemsPerSlide;
-    if (this.currentIndex <= 0) {
-      this.currentIndex = maxIndex; // Pindah ke akhir jika sedang di awal
-    } else {
-      this.currentIndex--;
-    }
+    // Abaikan jika sedang transisi atau carousel tidak aktif
+    if (this.isTransitioning || !this.isCarouselActive) return;
+    // Kunci aksi
+    this.isTransitioning = true;
+    this.currentIndex--;
   }
 
   manualNext(): void {
+    clearInterval(this.intervalId);
     this.next();
-    this.resetAutoSlide();
+    this.startAutoSlide();
   }
 
   manualPrev(): void {
+    clearInterval(this.intervalId);
     this.prev();
-    this.resetAutoSlide();
+    this.startAutoSlide();
   }
+
+  onTransitionEnd(): void {
+    // Cek untuk loop dari kanan ke kiri (setelah `next`)
+    if (this.currentIndex >= this.reviews.length + this.itemsPerSlide) {
+      this.transitionStyle = 'none';
+      this.currentIndex = this.itemsPerSlide;
+      setTimeout(() => {
+        this.transitionStyle = 'transform 0.5s ease-in-out';
+        this.isTransitioning = false; // Buka kunci setelah transisi siap
+      });
+      return; // Keluar dari fungsi lebih awal
+    }
+
+    // Cek untuk loop dari kiri ke kanan (setelah `prev`)
+    if (this.currentIndex < this.itemsPerSlide) {
+      this.transitionStyle = 'none';
+      this.currentIndex = this.reviews.length + this.itemsPerSlide - 1;
+      setTimeout(() => {
+        this.transitionStyle = 'transform 0.5s ease-in-out';
+        this.isTransitioning = false; // Buka kunci setelah transisi siap
+      });
+      return; // Keluar dari fungsi lebih awal
+    }
+
+    // Jika tidak ada 'lompatan', buka kunci setelah transisi normal selesai
+    this.isTransitioning = false;
+  }
+
+  // --- BATAS PERUBAHAN ---
 
   getStars(rating: number): number[] {
     return Array(Math.round(rating)).fill(0);
