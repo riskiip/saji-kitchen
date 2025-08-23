@@ -115,8 +115,8 @@
   margin: 0 auto;
 }
 
-.button-hero .menu-button,
-.button-hero .about-button {
+.button-hero .menu-button a,
+.button-hero .about-button a {
   background-color: var(--red);
   color: var(--white);
   border-radius: 10px;

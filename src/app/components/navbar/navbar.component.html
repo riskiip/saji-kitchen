@@ -14,15 +14,15 @@
     </div>
 
     <ul class="nav__links" [class.open]="isMenuOpen">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#menu">Menu</a></li>
-      <li><a href="#review">Review</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#contact">Contact Us</a></li>
+      <li (click)="closeMenu()"><a href="#home">Home</a></li>
+      <li (click)="closeMenu()"><a href="#menu">Menu</a></li>
+      <li (click)="closeMenu()"><a href="#review">Review</a></li>
+      <li (click)="closeMenu()"><a href="#gallery">Gallery</a></li>
+      <li (click)="closeMenu()"><a href="#contact">Contact Us</a></li>
     </ul>
 
     <div class="nav__btns">
-      <div class="nav__btn">
+      <div class="nav__btn" (click)="orderWhatsapp()">
         Pesan Sekarang
       </div>
     </div>

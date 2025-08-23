@@ -1,0 +1,108 @@
+// ===== MOBILE FIRST STYLES (Default untuk layar kecil) =====
+
+.site-footer {
+  // Requirement: Background linear gradient
+  background: linear-gradient(180deg, #fff3d9, #b99c7a);
+  padding: 3rem 1.5rem;
+  color: #5C4033; // Warna teks gelap agar kontras
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  // Requirement: Mobile menjadi 1 kolom
+  flex-direction: column;
+  gap: 2.5rem; // Jarak antar kolom di mobile
+  text-align: center; // Pusatkan semua teks di mobile
+}
+
+.footer-column {
+  // Tidak perlu width, akan otomatis full-width
+}
+
+.footer-title-box {
+  cursor: default;
+  border: 1.5px solid #8B4513; // Warna border coklat tua
+  border-radius: 999px; // Membuat bentuk "pill"
+  padding: 0.5rem 1.5rem;
+  display: inline-block; // Agar kotaknya tidak full-width
+  margin-bottom: 1.5rem;
+
+  h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    color: #8B4513;
+  }
+}
+
+// Styling untuk link dan paragraf
+.footer-column p {
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.footer-column a {
+  color: #5C4033;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #C46239; // Warna merah dari tema Anda
+  }
+}
+
+// Styling untuk ikon sosial media
+.social-icons {
+  display: flex;
+  justify-content: center; // Pusatkan ikon di mobile
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+
+  a {
+    font-size: 1.5rem; // Ukuran ikon
+  }
+}
+
+
+// ===== DESKTOP STYLES (Untuk layar 992px ke atas) =====
+
+@media (min-width: 992px) {
+  .site-footer {
+    padding: 5rem 2rem;
+  }
+
+  .footer-container {
+    // Requirement: Desktop menjadi 3 kolom
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left; // Teks rata kiri di desktop
+    align-items: flex-start; // Rata atas
+    gap: 2rem;
+  }
+
+  .footer-column {
+    flex: 1; // Beri ruang yang sama untuk setiap kolom
+    max-width: 350px; // Batasi lebar agar tidak terlalu melar
+  }
+
+  .footer-title-box {
+    // Tidak perlu diubah, sudah bagus
+  }
+
+  .social-icons {
+    justify-content: flex-start; // Ikon rata kiri di desktop
+  }
+}

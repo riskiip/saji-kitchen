@@ -1,32 +1,25 @@
 <section class="gallery-section" id="gallery">
-  <div class="wrapper">
-    <p>OUR GALLERY</p>
-    <h2>Galeri Saji Kitchen</h2>
-    <button
-      class="carousel-btn prev"
-      (click)="prevSlide()"
-      aria-label="Sebelumnya"
-    >
-      &#8592;
-    </button>
-    <div class="carousel" #carouselContainer>
-      <div class="carousel-track" #carouselTrack>
-        <img
-          *ngFor="let img of images; let i = index"
-          [src]="img"
-          [alt]="'Gallery ' + (i + 1)"
-          [ngClass]="{ active: i === currentIndex }"
-          class="carousel-img"
-          #carouselImgs
-        />
+  <div class="section-title">
+    <h2>GALLERY</h2>
+  </div>
+
+  <div class="gallery-content">
+    <div class="thumbnail-grid">
+      <div
+        *ngFor="let image of images"
+        class="thumbnail-item"
+        [class.active]="image.id === selectedImage?.id"
+        (click)="selectImage(image)">
+        <img [src]="image.src" [alt]="image.alt">
       </div>
     </div>
-    <button
-      class="carousel-btn next"
-      (click)="nextSlide()"
-      aria-label="Berikutnya"
-    >
-      &#8594;
-    </button>
+
+    <div class="preview-area">
+      <img
+        *ngIf="selectedImage"
+        [src]="selectedImage.src"
+        [alt]="selectedImage.alt"
+        [class.fading]="isFading">
+    </div>
   </div>
 </section>

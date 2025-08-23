@@ -6,7 +6,7 @@ import { ConstantApi } from '../../constants/constant-api';
   standalone: true,
   imports: [],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css',
+  styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
   currentYear: number;

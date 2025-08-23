@@ -1,0 +1,107 @@
+// Menggunakan pendekatan Mobile-First
+
+.gallery-section {
+  margin-top: 4rem;
+  width: 100%;
+  padding: 2rem;
+  background: url('../../../assets/background/gallery.png') no-repeat center;
+  box-sizing: border-box;
+}
+
+.section-title {
+  text-align: center;
+  color: #C46239; // Warna teks seperti di screenshot
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+}
+
+.gallery-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// --- MOBILE VIEW STYLES (Default) ---
+
+// Sembunyikan thumbnail di mobile
+.thumbnail-grid {
+  display: none;
+}
+
+.preview-area {
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 1 / 1; // Menjaga gambar tetap persegi
+  border-radius: 24px;
+  overflow: hidden; // Pastikan gambar tidak keluar dari border-radius
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Agar gambar memenuhi area tanpa distorsi
+    transition: opacity 0.3s ease-in-out; // Transisi untuk animasi fade
+
+    // Class untuk animasi fade
+    &.fading {
+      opacity: 0;
+    }
+  }
+}
+
+
+// --- DESKTOP VIEW STYLES (Untuk layar 992px ke atas) ---
+
+@media (min-width: 992px) {
+  .gallery-section {
+    padding: 4rem;
+  }
+
+  .gallery-content {
+    gap: 6rem;
+    align-items: flex-start;
+  }
+
+  // Tampilkan kembali thumbnail di desktop
+  .thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // 2 kolom
+    gap: 0.7rem;
+    flex-basis: 25%; // Atur lebar area thumbnail
+    max-width: 400px;
+    margin: auto 0;
+  }
+
+  .thumbnail-item {
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    opacity: 0.7;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    // Style untuk thumbnail yang sedang aktif
+    &.active {
+      border-color: #C46239;
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
+  .preview-area {
+    flex-basis: 35%; // Atur lebar area preview
+    max-width: none;
+  }
+}
