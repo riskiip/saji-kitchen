@@ -3,7 +3,7 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
   z-index: 10;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, padding-block 0.3s ease;
 }
@@ -113,7 +113,7 @@ nav.scrolled {
   }
 
   .nav__logo img {
-    max-width: 80px;
+    max-width: 60px;
   }
 
   .nav__logo span {
