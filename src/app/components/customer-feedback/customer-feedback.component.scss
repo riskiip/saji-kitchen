@@ -1,0 +1,101 @@
+:host {
+  --primary-text: #333;
+  --star-color: #860606;
+  --card-bg: rgba(255, 255, 255, 0.9);
+}
+
+.review-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  background: url('../../../assets/dimsum-review.png') no-repeat center;
+  color: var(--primary-text);
+  text-align: center;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 20px;
+  min-height: 597px;
+}
+
+.container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--red);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 50px;
+  display: inline-block;
+  position: relative;
+}
+
+.heart-icon {
+  position: absolute;
+  top: -10px;
+  right: -30px;
+  font-size: 1.5rem;
+  color: #e91e63;
+}
+
+.review-cards-container {
+  display: flex;
+  gap: 20px;
+}
+
+.review-card {
+  background: var(--card-bg);
+  opacity: 0.9;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  max-width: 278px;
+  min-height: 298px;
+}
+
+// Styling baru untuk header kartu (foto + nama)
+.review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 15px; // Jarak antara foto dan info
+}
+
+.customer-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; // Membuat gambar menjadi lingkaran
+  object-fit: cover; // Memastikan gambar tidak gepeng
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.customer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.stars {
+  color: var(--star-color);
+  font-size: 1rem;
+}
+
+.review-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin: 0;
+}
