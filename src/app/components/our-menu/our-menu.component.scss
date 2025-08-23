@@ -1,10 +1,12 @@
 .menu-section {
   width: 100%;
-  padding: 4rem 1.5rem;
+  padding: 3rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: linear-gradient(180deg, #fffdf9, #fff3d9);
+  box-sizing: border-box;
+  overflow-x: hidden; // DITAMBAHKAN: Mencegah overflow dari animasi
 }
 
 .section-title {
@@ -15,7 +17,7 @@
 
 .section-title h2 {
   color: var(--red);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   letter-spacing: 2px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
 }
@@ -23,24 +25,57 @@
 .menu-item {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   width: 100%;
   max-width: 500px;
 }
+
+// --- PERUBAHAN & PENAMBAHAN UNTUK ANIMASI ---
+
+.menu-image,
+.menu-details {
+  // Kondisi awal: elemen transparan dan sedikit bergeser ke atas
+  opacity: 0;
+  transform: translateY(30px);
+  // Transisi untuk membuat perubahan menjadi mulus
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.menu-image {
+  position: relative;
+  z-index: 1;
+}
+
+.menu-details {
+  position: relative;
+  z-index: 2;
+  margin-top: 10px;
+  // Beri delay agar muncul setelah gambar, menciptakan efek stagger
+  transition-delay: 0.2s;
+}
+
+// Class .in-view ini yang akan memicu animasi
+.menu-image.in-view,
+.menu-details.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+// --- AKHIR DARI PERUBAHAN ANIMASI ---
+
 
 .menu-image img {
   width: 100%;
   height: auto;
   border-radius: 16px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   display: block;
 }
 
 .menu-details {
-  background: url(../../../assets/box-price.png) no-repeat;
-  padding: 2rem 1.5rem;
+  background-image: url(../../../assets/box-price.png);
+  background-size: cover;
+  background-position: center;
+  padding: 1.5rem;
   border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
 }
@@ -49,7 +84,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .menu-name {
@@ -92,6 +127,9 @@
   background-color: #A52A2A;
 }
 
+
+// ===== DESKTOP STYLES (Untuk layar 992px ke atas) =====
+
 @media (min-width: 992px) {
   .menu-section {
     padding: 5rem 2rem;
@@ -105,7 +143,6 @@
     flex-direction: row;
     max-width: 1100px;
     align-items: center;
-    gap: 0;
   }
 
   .menu-name {
@@ -114,16 +151,19 @@
 
   .menu-details {
     flex: 1;
-    margin-left: -30px;
-    position: relative;
+    margin-left: -10px;
+    margin-top: 0;
     z-index: 1;
     padding: 3rem;
+    border: none;
   }
 
   .menu-image {
-    flex: 1.2;
-    position: relative;
     z-index: 2;
+    img {
+      width: 512px;
+      height: 512px;
+    }
   }
 
   .menu-price {
