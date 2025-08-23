@@ -1,27 +1,86 @@
-:host {
-  --primary-text: #333;
-  --star-color: #860606;
-  --card-bg: rgba(255, 255, 255, 0.9);
-}
-
 .review-section {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 50px 20px;
   background: url('../../../assets/dimsum-review.png') no-repeat center;
-  color: var(--primary-text);
+  color: var(--text-dark);
   text-align: center;
   border-radius: 20px;
-  overflow: hidden;
+  // Hapus overflow: hidden; dari sini agar tombol panah tidak terpotong
   margin: 20px;
   min-height: 597px;
+  position: relative; // Tambahkan ini untuk positioning tombol panah
 }
 
 .container {
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  // Kalkulasi lebar viewport: (4 kartu * 278px) + (3 jarak * 20px)
+  max-width: calc((4 * 278px) + (3 * 20px));
+  margin: 0 auto;
+  position: relative; // Tambahkan agar tombol panah lebih mudah diatur
+}
+
+.review-cards-container {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--red);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: var(--red);
+    color: var(--white);
+  }
+
+  // Sesuaikan posisi agar berada di luar viewport
+  &.left {
+    left: -60px;
+  }
+
+  &.right {
+    right: -60px;
+  }
+}
+
+.review-card {
+  background: var(--white-transparent);
+  opacity: 0.9;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  width: 278px; // Ganti max-width menjadi width
+  min-height: 298px;
+  flex-shrink: 0; // Mencegah kartu menyusut
 }
 
 .section-title {
@@ -39,7 +98,7 @@
   top: -10px;
   right: -30px;
   font-size: 1.5rem;
-  color: #e91e63;
+  color: var(--red-heart);
 }
 
 .review-cards-container {
@@ -48,7 +107,7 @@
 }
 
 .review-card {
-  background: var(--card-bg);
+  background: var(--white-transparent);
   opacity: 0.9;
   padding: 25px;
   border-radius: 15px;
@@ -65,15 +124,15 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  gap: 15px; // Jarak antara foto dan info
+  gap: 15px;
 }
 
 .customer-photo {
   width: 60px;
   height: 60px;
-  border-radius: 50%; // Membuat gambar menjadi lingkaran
-  object-fit: cover; // Memastikan gambar tidak gepeng
-  border: 3px solid #fff;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--white);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 

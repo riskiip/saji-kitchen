@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
@@ -7,10 +6,13 @@
   --primary-color-dark: #E5734A;
   --secondary-color: #FFCF4A;
   --red: #940303;
+  --star-color: #860606;
+  --red-heart: #e91e63;
   --text-dark: #4A4A4A;
   --text-light: #595959;
   --extra-light: #3c3633;
   --white: #fff;
+  --white-transparent: rgba(255, 255, 255, 0.7);
   --max-width: 1200px;
   --title-size: 33px;
   --description-size: 27px;
@@ -22,19 +24,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-
-.section__container {
-  max-width: var(--max-width);
-  margin: auto;
-  padding: 5rem 1rem;
-}
-
-.section__header {
-  font-size: 3rem;
-  font-weight: 700;
-  line-height: 4rem;
-  color: var(--text-dark);
 }
 
 .btn {

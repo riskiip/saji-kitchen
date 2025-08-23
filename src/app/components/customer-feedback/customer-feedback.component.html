@@ -4,21 +4,30 @@
       OUR HAPPY CUSTOMERS
     </h2>
 
-    <div class="review-cards-container">
-      <div class="review-card" *ngFor="let review of reviews">
+    <div class="carousel-viewport">
+      <div class="review-cards-container"
+           [style.transform]="'translateX(-' + currentIndex * ((278 + 20) * itemsPerSlide) + 'px)'">
 
-        <div class="review-header">
-          <img [src]="review.foto" alt="Foto {{ review.nama }}" class="customer-photo">
-          <div class="customer-info">
-            <h3 class="customer-name">{{ review.nama }}</h3>
-            <div class="stars">
-              <span class="star" *ngFor="let _ of getStars(review.score)">★</span>
+        <div class="review-card" *ngFor="let review of reviews">
+          <div class="review-header">
+            <img [src]="review.foto" alt="Foto {{ review.nama }}" class="customer-photo">
+            <div class="customer-info">
+              <h3 class="customer-name">{{ review.nama }}</h3>
+              <div class="stars">
+                <span class="star" *ngFor="let _ of getStars(review.score)">★</span>
+              </div>
             </div>
           </div>
+          <p class="review-text">"{{ review.review }}"</p>
         </div>
 
-        <p class="review-text">"{{ review.review }}"</p>
       </div>
     </div>
+
+    <ng-container *ngIf="totalPages > 1">
+      <button class="carousel-arrow left" (click)="manualPrev()">&#10094;</button>
+      <button class="carousel-arrow right" (click)="manualNext()">&#10095;</button>
+    </ng-container>
+
   </div>
 </section>

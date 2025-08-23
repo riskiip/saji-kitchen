@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import {CommonModule} from "@angular/common";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule } from "@angular/common";
 
 interface Review {
   nama: string;
   review: string;
-  score: number; // Angka dari 1 sampai 5
-  foto: string; // Path ke file gambar atau URL
+  score: number;
+  foto: string;
 }
 
 @Component({
@@ -15,37 +15,67 @@ interface Review {
   templateUrl: './customer-feedback.component.html',
   styleUrl: './customer-feedback.component.scss',
 })
-export class CustomerFeedbackComponent {
-  // Data ulasan statis disimpan di sini
+export class CustomerFeedbackComponent implements OnInit, OnDestroy {
   reviews: Review[] = [
-    {
-      nama: "Farhan Pratama",
-      review: "Worth the price",
-      score: 5,
-      foto: "assets/images/profile-male-1.jpg" // Ganti dengan path foto Anda
-    },
-    {
-      nama: "Sisca",
-      review: "dimsum mentainya enakk, ukuran dimsumnya juga besar dan berasa daging ayamnyaa 💯",
-      score: 5,
-      foto: "assets/images/profile-female-1.jpg" // Ganti dengan path foto Anda
-    },
-    {
-      nama: "Ayu Galuh",
-      review: "Enak bangetttt, daging nya banyakk. Mentai nya juga mantapp bangett",
-      score: 5,
-      foto: "assets/images/profile-male-2.jpg" // Ganti dengan path foto Anda
-    },
-    {
-      nama: "Bernanda F. Putri",
-      review: "yummy sekalii\n" +
-        "dagingnya terasaa, mentainya juga enakkkk",
-      score: 5,
-      foto: "assets/images/profile-female-2.jpg" // Ganti dengan path foto Anda
-    }
+    { nama: "Farhan Pratama", review: "Worth the price", score: 5, foto: "assets/images/profile-male-1.jpg" },
+    { nama: "Sisca", review: "dimsum mentainya enakk, ukuran dimsumnya juga besar dan berasa daging ayamnyaa 💯", score: 5, foto: "assets/images/profile-female-1.jpg" },
+    { nama: "Ayu Galuh", review: "Enak bangetttt, daging nya banyakk. Mentai nya juga mantapp bangett", score: 5, foto: "assets/images/profile-male-2.jpg" },
+    { nama: "Bernanda F. Putri", review: "yummy sekalii dagingnya terasaa, mentainya juga enakkkk", score: 5, foto: "assets/images/profile-female-2.jpg" },
+    // Tambahkan data lain jika perlu untuk melihat slide kedua
+    { nama: "Rizky", review: "Akan pesan lagi pastinya!", score: 5, foto: "assets/images/profile-male-1.jpg" },
+    { nama: "Dewi", review: "Saus mentainya juara, beda dari yang lain.", score: 5, foto: "assets/images/profile-female-1.jpg" },
   ];
 
-  constructor() { }
+  currentIndex = 0; // Tetap melacak slide saat ini
+  private intervalId?: any;
+
+  // Konfigurasi baru untuk slide
+  readonly itemsPerSlide = 4;
+
+  // Getter untuk menghitung total halaman/slide
+  get totalPages(): number {
+    return Math.ceil(this.reviews.length / this.itemsPerSlide);
+  }
+
+  ngOnInit(): void {
+    this.startAutoSlide();
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.intervalId);
+  }
+
+  startAutoSlide(): void {
+    // Hanya mulai auto-slide jika ada lebih dari 1 halaman
+    if (this.totalPages > 1) {
+      this.intervalId = setInterval(() => {
+        this.next();
+      }, 5000);
+    }
+  }
+
+  resetAutoSlide(): void {
+    clearInterval(this.intervalId);
+    this.startAutoSlide();
+  }
+
+  next(): void {
+    this.currentIndex = (this.currentIndex + 1) % this.totalPages;
+  }
+
+  prev(): void {
+    this.currentIndex = (this.currentIndex - 1 + this.totalPages) % this.totalPages;
+  }
+
+  manualNext(): void {
+    this.next();
+    this.resetAutoSlide();
+  }
+
+  manualPrev(): void {
+    this.prev();
+    this.resetAutoSlide();
+  }
 
   getStars(rating: number): number[] {
     return Array(Math.round(rating)).fill(0);
