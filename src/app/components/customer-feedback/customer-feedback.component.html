@@ -6,7 +6,7 @@
 
     <div class="carousel-viewport">
       <div class="review-cards-container"
-           [style.transform]="'translateX(-' + currentIndex * ((278 + 20) * itemsPerSlide) + 'px)'">
+           [style.transform]="'translateX(-' + currentIndex * (278 + 20) + 'px)'">
 
         <div class="review-card" *ngFor="let review of reviews">
           <div class="review-header">
@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <ng-container *ngIf="totalPages > 1">
+    <ng-container *ngIf="isCarouselActive">
       <button class="carousel-arrow left" (click)="manualPrev()">&#10094;</button>
       <button class="carousel-arrow right" (click)="manualNext()">&#10095;</button>
     </ng-container>

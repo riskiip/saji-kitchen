@@ -21,20 +21,20 @@ export class CustomerFeedbackComponent implements OnInit, OnDestroy {
     { nama: "Sisca", review: "dimsum mentainya enakk, ukuran dimsumnya juga besar dan berasa daging ayamnyaa 💯", score: 5, foto: "assets/images/profile-female-1.jpg" },
     { nama: "Ayu Galuh", review: "Enak bangetttt, daging nya banyakk. Mentai nya juga mantapp bangett", score: 5, foto: "assets/images/profile-male-2.jpg" },
     { nama: "Bernanda F. Putri", review: "yummy sekalii dagingnya terasaa, mentainya juga enakkkk", score: 5, foto: "assets/images/profile-female-2.jpg" },
-    // Tambahkan data lain jika perlu untuk melihat slide kedua
     { nama: "Rizky", review: "Akan pesan lagi pastinya!", score: 5, foto: "assets/images/profile-male-1.jpg" },
     { nama: "Dewi", review: "Saus mentainya juara, beda dari yang lain.", score: 5, foto: "assets/images/profile-female-1.jpg" },
+    { nama: "Andi", review: "Pelayanannya cepat dan rasanya konsisten.", score: 5, foto: "assets/images/profile-male-2.jpg" },
   ];
 
-  currentIndex = 0; // Tetap melacak slide saat ini
+  currentIndex = 0;
   private intervalId?: any;
 
-  // Konfigurasi baru untuk slide
+  // Tetap definisikan berapa item yang terlihat
   readonly itemsPerSlide = 4;
 
-  // Getter untuk menghitung total halaman/slide
-  get totalPages(): number {
-    return Math.ceil(this.reviews.length / this.itemsPerSlide);
+  // Cek apakah carousel perlu aktif (jika jumlah item lebih banyak dari yang bisa ditampilkan)
+  get isCarouselActive(): boolean {
+    return this.reviews.length > this.itemsPerSlide;
   }
 
   ngOnInit(): void {
@@ -46,8 +46,7 @@ export class CustomerFeedbackComponent implements OnInit, OnDestroy {
   }
 
   startAutoSlide(): void {
-    // Hanya mulai auto-slide jika ada lebih dari 1 halaman
-    if (this.totalPages > 1) {
+    if (this.isCarouselActive) {
       this.intervalId = setInterval(() => {
         this.next();
       }, 5000);
@@ -59,12 +58,23 @@ export class CustomerFeedbackComponent implements OnInit, OnDestroy {
     this.startAutoSlide();
   }
 
+  // Logika baru untuk bergeser satu per satu
   next(): void {
-    this.currentIndex = (this.currentIndex + 1) % this.totalPages;
+    const maxIndex = this.reviews.length - this.itemsPerSlide;
+    if (this.currentIndex >= maxIndex) {
+      this.currentIndex = 0; // Kembali ke awal jika sudah di akhir
+    } else {
+      this.currentIndex++;
+    }
   }
 
   prev(): void {
-    this.currentIndex = (this.currentIndex - 1 + this.totalPages) % this.totalPages;
+    const maxIndex = this.reviews.length - this.itemsPerSlide;
+    if (this.currentIndex <= 0) {
+      this.currentIndex = maxIndex; // Pindah ke akhir jika sedang di awal
+    } else {
+      this.currentIndex--;
+    }
   }
 
   manualNext(): void {
